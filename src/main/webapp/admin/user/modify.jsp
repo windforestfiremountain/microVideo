@@ -17,6 +17,55 @@
     <script src="/js/jquery-3.6.0.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/address.js"></script>
+    <script>
+
+        // 省市三级菜单
+        $(function () {
+            var html = "";
+            $("#input_city").append(html);
+            $("#input_area").append(html);
+            $.each(pdata, function (idx, item) {
+                if (parseInt(item.level) == 0) {
+                    html += "<option value=" + item.code + " >" + item.names + "</option> ";
+                }
+            });
+            $("#input_province").append(html);
+
+            $("#input_province").change(function () {
+                if ($(this).val() == "") return;
+                $("#input_city option").remove();
+                $("#input_area option").remove();
+                //var code = $(this).find("option:selected").attr("exid");
+                var code = $(this).find("option:selected").val();
+                code = code.substring(0, 2);
+                var html = "<option value=''>--请选择--</option>";
+                $("#input_area option").append(html);
+                $.each(pdata, function (idx, item) {
+                    if (parseInt(item.level) == 1 && code == item.code.substring(0, 2)) {
+                        html += "<option value=" + item.code + " >" + item.names + "</option> ";
+                    }
+                });
+                $("#input_city ").append(html);
+            });
+
+            $("#input_city").change(function () {
+                if ($(this).val() == "") return;
+                $("#input_area option").remove();
+                var code = $(this).find("option:selected").val();
+                code = code.substring(0, 4);
+                var html = "<option value=''>--请选择--</option>";
+                $.each(pdata, function (idx, item) {
+                    if (parseInt(item.level) == 2 && code == item.code.substring(0, 4)) {
+                        html += "<option value=" + item.code + " >" + item.names + "</option> ";
+                    }
+                });
+                $("#input_area ").append(html);
+            });
+        });
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -99,11 +148,30 @@
 
 <%--封面TODO--%>
                     <div class="form-group">
-                        <label for="birthplace" class="col-sm-2 control-label">出生地:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="birthplace" name="birthplace" placeholder="请输入出生地" value="${requestScope.user.birthplace}" >
+                        <label class="col-sm-2 control-label"><i>*</i>出生地:</label>
+                        <div class="col-sm-3">
+                            <select name="input_province" id="input_province" class="form-control">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="input_city" id="input_city" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="input_area" id="input_area" class="form-control">
+                                <option value=""></option>
+                            </select>
                         </div>
                     </div>
+
+<%--                    <div class="form-group">--%>
+<%--                        <label for="birthplace" class="col-sm-2 control-label">出生地:</label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <input type="text" class="form-control" id="birthplace" name="birthplace" placeholder="请输入出生地" value="${requestScope.user.birthplace}" >--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
 
                     <div class="form-group">
                         <label for="description" class="col-sm-2 control-label">自我介绍:</label>

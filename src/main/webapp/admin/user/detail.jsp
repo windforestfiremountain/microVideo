@@ -96,7 +96,7 @@
                 <%--封面TODO--%>
 
                 <div class="form-group">
-                    <label  class="col-sm-2 control-label">出生地:</label>
+                    <label  class="col-sm-2 control-label">出生(身份证前六位):</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" value="${requestScope.user.birthplace}" readonly="readonly">
                     </div>

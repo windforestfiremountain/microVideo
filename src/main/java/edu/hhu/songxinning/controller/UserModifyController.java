@@ -32,7 +32,9 @@ public class UserModifyController extends HttpServlet {
         String phone =request.getParameter("phone");
         String email =request.getParameter("email");
         String description =request.getParameter("description");
-        String birthplace =request.getParameter("birthplace");
+//        String birthplace =request.getParameter("birthplace");
+        String birthplace =request.getParameter("input_area");
+        System.out.println("!birthplace="+birthplace);
 
         //2. 将信息封装成一个video对象。
         User user = new User();
@@ -46,6 +48,7 @@ public class UserModifyController extends HttpServlet {
         user.setPhone(phone);
         user.setEmail(email);
         user.setDescription(description);
+        System.out.println("@birthplace="+birthplace);
         user.setBirthplace(birthplace);
 
 

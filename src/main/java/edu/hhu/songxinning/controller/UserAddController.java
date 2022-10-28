@@ -65,6 +65,11 @@ public class UserAddController extends HttpServlet{
                 if(fileItem.isFormField()){
                     String name = fileItem.getFieldName();
                     String value = fileItem.getString("UTF-8");
+//                    String province ="";
+//                    String city ="";
+//                    String area ="";
+//                    String [] strs= new String[3];
+                    String birthPlace="";
                     if(name.equals("nickName")){
                         user.setNickName(value);
                     }
@@ -74,31 +79,10 @@ public class UserAddController extends HttpServlet{
                     if(name.equals("password")){
                         user.setPassword(value);
                     }
-//                    String p_word0 = " ";
-//                    String p_word1 = " ";
-//                    if(name.equals("password")){
-//                        p_word0 = value;
-//                    }
-//                    if(name.equals("repassword")){
-//                        p_word1 = value;
-//
-//                        System.out.println("p_word1="+p_word1);
-//                        System.out.println("p"+p_word0.equals(p_word1));
-//
-//                        if(!(p_word0.equals(p_word1))){
-//                            request.setAttribute("msg1", "密码不一致,请重新注册");
-//                            request.getRequestDispatcher("/front/register.jsp").forward(request,response);
-//                            return;
-//                        }
-//                        else{
-//                            user.setPassword(value);
-//                        }
-//                    }
 
                     if(name.equals("gender")){
                         user.setGender(value);
                     }
-                    //TimeLength是整形
                     if(name.equals("birthday")){
                         user.setBirthday(value);
                     }
@@ -108,9 +92,26 @@ public class UserAddController extends HttpServlet{
                     if(name.equals("email")){
                         user.setEmail(value);
                     }
-                    if(name.equals("birthplace")){
-                        user.setBirthplace(value);
+                    if(name.equals("email")){
+                        user.setEmail(value);
                     }
+                    if(name.equals("input_province")){
+                        birthPlace = birthPlace + value +",";
+                        System.out.println("birthPlace="+birthPlace);
+                    }
+                    if(name.equals("input_city")){
+                        birthPlace = birthPlace + value +"," ;
+                        System.out.println("birthPlace="+birthPlace);
+                    }
+                    if(name.equals("input_area")){
+                        birthPlace = birthPlace + value ;
+                        System.out.println("birthPlace="+birthPlace);
+                        user.setBirthplace(birthPlace);
+                    }
+
+//                    if(name.equals("birthplace")){
+//                        user.setBirthplace(value);
+//                    }
                     if(name.equals("description")){
                         user.setDescription(value);
                     }

@@ -17,6 +17,8 @@
     <script src="/js/jquery-3.6.0.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/My97DatePicker/WdatePicker.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/address.js"></script>
     <script>
         function validate(){
             //获取手机号码的控件
@@ -79,6 +81,50 @@
 
         })
 
+        // 省市三级菜单
+        $(function () {
+            var html = "";
+            $("#input_city").append(html);
+            $("#input_area").append(html);
+            $.each(pdata, function (idx, item) {
+                if (parseInt(item.level) == 0) {
+                    html += "<option value=" + item.code + " >" + item.names + "</option> ";
+                }
+            });
+            $("#input_province").append(html);
+
+            $("#input_province").change(function () {
+                if ($(this).val() == "") return;
+                $("#input_city option").remove();
+                $("#input_area option").remove();
+                //var code = $(this).find("option:selected").attr("exid");
+                var code = $(this).find("option:selected").val();
+                code = code.substring(0, 2);
+                var html = "<option value=''>--请选择--</option>";
+                $("#input_area option").append(html);
+                $.each(pdata, function (idx, item) {
+                    if (parseInt(item.level) == 1 && code == item.code.substring(0, 2)) {
+                        html += "<option value=" + item.code + " >" + item.names + "</option> ";
+                    }
+                });
+                $("#input_city ").append(html);
+            });
+
+            $("#input_city").change(function () {
+                if ($(this).val() == "") return;
+                $("#input_area option").remove();
+                var code = $(this).find("option:selected").val();
+                code = code.substring(0, 4);
+                var html = "<option value=''>--请选择--</option>";
+                $.each(pdata, function (idx, item) {
+                    if (parseInt(item.level) == 2 && code == item.code.substring(0, 4)) {
+                        html += "<option value=" + item.code + " >" + item.names + "</option> ";
+                    }
+                });
+                $("#input_area ").append(html);
+            });
+        });
+
     </script>
 
 </head>
@@ -102,19 +148,19 @@
 
                 <form class="form-horizontal" action="/userAdd" method="post" enctype="multipart/form-data" onsubmit="validate()">
                     <div class="form-group">
-                        <label for="nickName" class="col-sm-2 control-label">昵称:</label>
+                        <label for="nickName" class="col-sm-2 control-label"><i>*</i>昵称:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="nickName" name="nickName" placeholder="请输入您的昵称">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="account" class="col-sm-2 control-label">账号:</label>
+                        <label for="account" class="col-sm-2 control-label"><i>*</i>账号:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="account" name="account" placeholder="请输入账号">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">密码:</label>
+                        <label for="password" class="col-sm-2 control-label"><i>*</i>密码:</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
                         </div>
@@ -127,7 +173,7 @@
 <%--                        </div>--%>
 <%--                    </div>--%>
                     <div class="form-group">
-                        <label for="repassword" class="col-sm-2 control-label">确认密码:</label>
+                        <label for="repassword" class="col-sm-2 control-label"><i>*</i>确认密码:</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" id="repassword" onkeyup="keyvalid()" placeholder="请再次输入密码">
                             <span id="tishi"></span>
@@ -145,13 +191,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="phone" class="col-sm-2 control-label">手机号码:</label>
+                        <label for="phone" class="col-sm-2 control-label"><i>*</i>手机号码:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号码">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="col-sm-2 control-label">Email:</label>
+                        <label for="email" class="col-sm-2 control-label"><i>*</i>Email:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="email" name="email" placeholder="请输入电子邮箱">
                         </div>
@@ -214,11 +260,30 @@
 <%--                    </div>--%>
 
                     <div class="form-group">
-                        <label for="birthplace" class="col-sm-2 control-label">出生地:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="birthplace" name="birthplace" placeholder="请输入出生地">
+                        <label class="col-sm-2 control-label"><i>*</i>所在地址</label>
+                        <div class="col-sm-3">
+                            <select name="input_province" id="input_province" class="form-control">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="input_city" id="input_city" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="input_area" id="input_area" class="form-control">
+                                <option value=""></option>
+                            </select>
                         </div>
                     </div>
+
+<%--                    <div class="form-group">--%>
+<%--                        <label for="birthplace" class="col-sm-2 control-label">出生地:</label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <input type="text" class="form-control" id="birthplace" name="birthplace" placeholder="请输入出生地">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
 
                     <div class="form-group">
                         <label for="description" class="col-sm-2 control-label">自我介绍:</label>
