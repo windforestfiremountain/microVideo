@@ -33,7 +33,7 @@
             //获取邮箱号码的控件
             let emailTag = $("#email")
             //写合法邮箱正则表达式。
-            let emailRegex =/\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}/
+            let emailRegex =/^(\w+([-.][A-Za-z0-9]+)*){3,18}@\w+([-.][A-Za-z0-9]+)*\.\w+([-.][A-Za-z0-9]+)*$/
             let emailMatchResult = emailRegex.test(emailTag.val())
             if(!emailMatchResult){
                 alert("请输入正确的邮件格式")
@@ -44,6 +44,19 @@
 
             return true
         }
+        function keyvalid() {
+            var pw1 = document.getElementById("password").value;
+            var pw2 = document.getElementById("repassword").value;
+            if(pw1 == pw2) {
+                document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";
+                document.getElementById("submit").disabled = false;
+            }
+            else {
+                document.getElementById("tishi").innerHTML="<font color='red'>两次密码不相同</font>";
+                document.getElementById("submit").disabled = true;
+            }
+        }
+
     //    失去光标
         $(function (){
             $("#account").blur(function () {
@@ -109,9 +122,17 @@
 <%--                    <div class="form-group">--%>
 <%--                        <label for="repassword" class="col-sm-2 control-label">确认密码:</label>--%>
 <%--                        <div class="col-sm-10">--%>
-<%--                            <input type="password" class="form-control" id="repassword" placeholder="请再次输入密码">--%>
+<%--                            <input type="password" class="form-control" id="repassword" name="repassword" placeholder="请确认您的密码">--%>
+<%--                            <span id="password_err" style="color: #FF2F2F">${msg1}</span>--%>
 <%--                        </div>--%>
 <%--                    </div>--%>
+                    <div class="form-group">
+                        <label for="repassword" class="col-sm-2 control-label">确认密码:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="repassword" onkeyup="keyvalid()" placeholder="请再次输入密码">
+                            <span id="tishi"></span>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">性别:</label>
                         <div class="col-sm-10">

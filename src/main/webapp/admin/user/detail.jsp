@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">密码:</label>
                     <div class="col-sm-10">
-                        <input type="password" value="${requestScope.user.password}" readonly="readonly">
+                        <input type="text" class="form-control" value="${requestScope.user.password}" readonly="readonly">
                     </div>
                 </div>
 <%--                    下拉菜单,但是查看的时候已经是值了--%>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">性别:</label>
                     <div class="col-sm-10">
-                        <input type="text" value="${requestScope.user.gender}" readonly="readonly">
+                        <input type="text" class="form-control" value="${requestScope.user.gender}" readonly="readonly">
                     </div>
                 </div>
 

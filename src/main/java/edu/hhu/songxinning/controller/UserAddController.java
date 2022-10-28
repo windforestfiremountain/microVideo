@@ -74,6 +74,27 @@ public class UserAddController extends HttpServlet{
                     if(name.equals("password")){
                         user.setPassword(value);
                     }
+//                    String p_word0 = " ";
+//                    String p_word1 = " ";
+//                    if(name.equals("password")){
+//                        p_word0 = value;
+//                    }
+//                    if(name.equals("repassword")){
+//                        p_word1 = value;
+//
+//                        System.out.println("p_word1="+p_word1);
+//                        System.out.println("p"+p_word0.equals(p_word1));
+//
+//                        if(!(p_word0.equals(p_word1))){
+//                            request.setAttribute("msg1", "密码不一致,请重新注册");
+//                            request.getRequestDispatcher("/front/register.jsp").forward(request,response);
+//                            return;
+//                        }
+//                        else{
+//                            user.setPassword(value);
+//                        }
+//                    }
+
                     if(name.equals("gender")){
                         user.setGender(value);
                     }

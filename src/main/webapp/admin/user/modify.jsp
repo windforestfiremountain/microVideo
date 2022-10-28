@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>后台视频修改页面</title>
+    <title>后台用户修改页面</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <script src="/js/jquery-3.6.0.js"></script>
     <script src="/js/bootstrap.js"></script>
@@ -23,8 +23,7 @@
 <%--        加一行,并设置样式style--%>
         <div class="row" style="margin-top: 30px">
             <div class="col-md-12" style="text-align: center">
-                <h3>修改视频</h3>
-                ${requestScope.videoList}
+                <h3>修改用户</h3>
             </div>
         </div>
         <div class="row" style="margin-top: 30px">
