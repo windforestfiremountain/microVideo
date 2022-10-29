@@ -127,6 +127,18 @@
 
     </script>
 
+    <style>
+        body{
+            background-image:url('/imags/register.png');
+            background-repeat:no-repeat ;
+            background-size:100% 100%;
+            margin-top: 5%;
+
+            background-attachment: fixed;
+        }
+
+    </style>
+
 </head>
 <body>
     <div class="container">

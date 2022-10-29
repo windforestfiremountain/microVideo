@@ -16,6 +16,17 @@
     <script src="/js/jquery-3.6.0.js"></script>
     <script src="/js/bootstrap.js"></script>
 <%--    <script src="js/My97DatePicker/WdatePicker.js"></script>--%>
+    <style>
+        body{
+            background-image:url('/imags/adminlogin.PNG');
+            background-repeat:no-repeat ;
+            background-size:100% 100%;
+            margin-top: 8%;
+
+            background-attachment: fixed;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container">
